@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 1042;
 app.use(express.json())
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:["http://localhost:5173","https://speaking-one.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials:true,
 }))
@@ -20,10 +20,7 @@ app.use("/" , ResponseRouter)
 app.use("/" , UserRouter)
 connection()
 .then(()=>{
-    app.post("/" , async(req , res)=>{
-        const {input} = req.body;
-        run(input)
-    })
+    
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
       })
